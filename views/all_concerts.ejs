@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Concerts</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-purple-100 to-purple-300 min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="bg-purple-700 text-white w-64 min-h-screen p-6 hidden md:block">
+        <h2 class="text-2xl font-bold mb-6">🎵 Concert Hub</h2>
+
+        <!-- Sidebar Navigation -->
+        <nav class="space-y-4">
+            <a href="/all_concerts" class="block bg-purple-600 px-4 py-2 rounded-md hover:bg-purple-800 transition">🎟️ Book a Concert</a>
+            <a href="/view-bookings" class="block bg-purple-600 px-4 py-2 rounded-md hover:bg-purple-800 transition">📑 View My Bookings</a>
+            <a href="/logout" class="block bg-red-600 px-4 py-2 rounded-md hover:bg-red-700 transition">🚪 Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+
+        <!-- Page Title -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-center text-purple-700 drop-shadow-lg mb-10">
+            🎵 Available Concerts 🎶
+        </h1>
+
+        <% if (message) { %>
+            <p class="text-center text-red-600 font-semibold text-lg mb-8 animate-pulse"><%= message %></p>
+        <% } else { %>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <% concerts.forEach(concert => { %>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                        
+                        <!-- Image Container -->
+                        <div class="w-full h-52 overflow-hidden">
+                            <img 
+                                src="https://i.pinimg.com/736x/65/3f/6d/653f6df98a4e3f4be460c360e5b8bda2.jpg" 
+                                alt="<%= concert.title %>" 
+                                class="w-full h-full object-cover transform hover:scale-110 transition-all duration-500"
+                            >
+                        </div>
+
+                        <!-- Content Container -->
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold text-gray-900 mb-4 truncate hover:text-purple-600 transition-colors duration-300">
+                                <%= concert.title %>
+                            </h2>
+
+                            <!-- Concert Details -->
+                            <div class="space-y-2 mb-6 text-gray-700">
+                                <p><span class="font-semibold text-gray-900">🎤 Artist:</span> <%= concert.artist %></p>
+                                <p><span class="font-semibold text-gray-900">📍 Venue:</span> <%= concert.venue %></p>
+                                <p><span class="font-semibold text-gray-900">📅 Date:</span> <%= new Date(concert.date).toDateString() %></p>
+                                <p><span class="font-semibold text-gray-900">💲 Price:</span> $<%= concert.ticketPrice %></p>
+                                <p><span class="font-semibold text-gray-900">🎟️ Available Tickets:</span> <%= concert.availableTickets %></p>
+                            </div>
+
+                            <!-- Book Button -->
+                            <a 
+                                href="/booking/book_concert/<%= concert._id %>" 
+                                class="block w-full text-center bg-purple-600 text-white py-3 rounded-md hover:bg-purple-800 transform hover:scale-105 transition-all duration-300 font-medium shadow-md"
+                            >
+                                🎟️ Book Now
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= concert.concertName %> - Ticket Details</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-100">
+
+    <div class="header text-center mb-8">
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-4"><%= concert.concertName %></h1>
+        <p class="text-lg text-gray-700"><strong>Artist:</strong> <%= concert.artist %></p>
+        <p class="text-lg text-gray-700"><strong>Venue:</strong> <%= concert.venue %></p>
+        <p class="text-lg text-gray-700"><strong>Date:</strong> <%= concert.dateTime.toLocaleString() %></p>
+    </div>
+
+    <div class="details mb-8">
+        <p class="text-lg text-gray-700"><strong>Ticket Price:</strong> $<%= concert.ticketPrice %></p>
+        <p class="text-lg text-gray-700"><strong>Available Tickets:</strong> <%= concert.availableTickets %></p>
+    </div>
+
+    <!-- QR Code Section -->
+    <div class="qr-code text-center mt-8">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Scan this QR code for details</h3>
+        <img src="<%= qrCodeImage %>" alt="QR Code for <%= concert.concertName %>" class="mx-auto max-w-[150px] rounded-lg shadow-md"/>
+    </div>
+
+</body>
+</html>

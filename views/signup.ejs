@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Service - Sign Up</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background-color: #6366f1;
+            background-image: linear-gradient(to bottom right, #6366f1, #818cf8);
+        }
+    </style>
+</head>
+<body class="bg-purple-50 min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="flex w-full max-w-6xl gap-8">
+            <!-- Left Hero Section -->
+            <div class="hidden md:flex flex-col flex-1 hero-section rounded-xl p-8 text-white">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold mb-4">Listen to your top musics</h2>
+                    <div class="text-3xl font-bold">FOR FREE</div>
+                </div>
+                <div class="flex-1 relative">
+                    <% if (typeof errorMessage !== 'undefined') { %>
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                            <%= errorMessage %>
+                        </div>
+                    <% } %>
+                    <img src="https://m.media-amazon.com/images/M/MV5BNTk4YTdkMTYtZDhjNy00ZjA5LTk0MmEtYjY3NjBhYjE2Njg0XkEyXkFqcGc@._V1_.jpg" alt="Person with headphones" class="absolute inset-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+
+            <!-- Right Form Section -->
+            <div class="flex-1 bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-semibold text-purple-600 mb-6">Sign Up</h2>
+                
+                <form action="/signup" method="POST" class="space-y-4">
+                    <!-- Email Field -->
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Email</label>
+                        <input 
+                            type="email" 
+                            name="email"
+                            class="w-full p-2 border rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            required
+                        >
+                    </div>
+
+                    <!-- Password Fields -->
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Password</label>
+                        <input 
+                            type="password" 
+                            name="password"
+                            class="w-full p-2 border rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Re-enter password</label>
+                        <input 
+                            type="password" 
+                            name="confirmPassword"
+                            class="w-full p-2 border rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            required
+                        >
+                    </div>
+
+                    <!-- Terms Checkbox -->
+                    <div class="flex items-center gap-2">
+                        <input 
+                            type="checkbox" 
+                            id="terms" 
+                            name="terms"
+                            class="rounded border-gray-300"
+                            required
+                        >
+                        <label for="terms" class="text-sm">
+                            I've read and agree with <a href="#" class="text-purple-600">Terms of Service</a> and our
+                            <a href="#" class="text-purple-600">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit"
+                        class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition-colors"
+                    >
+                        Sign up
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">OR</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Login Buttons -->
+                    <div class="flex gap-4">
+                        <a href="/auth/google" class="flex-1 flex items-center justify-center gap-2 border rounded-md p-2 hover:bg-gray-50 transition-colors">
+                            <span class="text-sm">Sign up with Google</span>
+                        </a>
+                        <a href="/auth/facebook" class="flex-1 flex items-center justify-center gap-2 border rounded-md p-2 hover:bg-gray-50 transition-colors">
+                            <span class="text-sm">Sign up with Facebook</span>
+                        </a>
+                    </div>
+
+                    <!-- Sign In Link -->
+                    <p class="text-center text-sm text-gray-600">
+                        Already have an account? 
+                        <a href="/login" class="text-purple-600 hover:underline">Sign in</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% if (typeof error !== 'undefined') { %>
+        <script>
+            alert('<%= error %>');
+        </script>
+    <% } %>
+</body>
+</html>

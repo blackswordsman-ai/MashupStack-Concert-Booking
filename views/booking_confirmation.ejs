@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-b from-purple-100 to-purple-300 min-h-screen p-4 md:p-8 flex items-center justify-center">
+
+    <div class="max-w-2xl mx-auto">
+        <!-- Confirmation Card -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
+            
+            <!-- Success Icon -->
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center animate-bounce">
+                    <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-6">
+                🎉 Booking Confirmed!
+            </h1>
+
+            <!-- Booking Details -->
+            <div class="space-y-4 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Concert Title -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <p class="text-xs text-gray-500 uppercase">Concert</p>
+                        <p class="font-semibold text-gray-900"><%= concert.title %></p>
+                    </div>
+                    
+                    <!-- Venue -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <p class="text-xs text-gray-500 uppercase">Venue</p>
+                        <p class="font-semibold text-gray-900"><%= concert.venue %></p>
+                    </div>
+
+                    <!-- Booking Date -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <p class="text-xs text-gray-500 uppercase">Booking Date</p>
+                        <p class="font-semibold text-gray-900"><%= booking.bookingDate %></p>
+                    </div>
+
+                    <!-- Number of Tickets -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <p class="text-xs text-gray-500 uppercase">Number of Tickets</p>
+                        <p class="font-semibold text-gray-900"><%= booking.numberOfTickets %></p>
+                    </div>
+
+                    <!-- Booking Status -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <p class="text-xs text-gray-500 uppercase">Status</p>
+                        <p class="font-semibold text-gray-900 capitalize"><%= booking.status %></p>
+                    </div>
+                </div>
+
+                <!-- Total Amount -->
+                <div class="bg-purple-200 p-4 rounded-lg shadow-md text-center">
+                    <p class="text-xs text-purple-700 uppercase font-semibold">Total Amount</p>
+                    <p class="text-3xl font-extrabold text-purple-800">$<%= totalAmount %></p>
+                </div>
+            </div>
+
+            QR Code Section
+            <div class="text-center mb-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">📲 Your QR Code</h2>
+                <div class="bg-white p-4 inline-block rounded-lg shadow-md">
+                    <img 
+                        src="<%= qrCodePath %>" 
+                        alt="QR Code"
+                        class="mx-auto max-w-[200px] transition-transform duration-300 hover:scale-110"
+                    >
+                </div>
+            </div>
+
+            <!-- Download Button -->
+            <div class="text-center">
+                <a href="/booking/booking_confirmation/<%= booking._id %>" class="inline-flex items-center justify-center bg-purple-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-purple-800 hover:scale-105 transform transition-all duration-300">
+                    Download Ticket
+                </a>
+                <a 
+                    href="<%= pdfPath %>" 
+                    download
+                    class="inline-flex items-center justify-center bg-purple-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-purple-800 hover:scale-105 transform transition-all duration-300 mt-4"
+                >
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    Download PDF Ticket
+                </a>
+                <!-- Go Back Button -->
+<div class="text-center mt-6">
+    <button onclick="window.history.back()" 
+        class="inline-flex items-center justify-center bg-gray-400 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-500 hover:scale-105 transform transition-all duration-300">
+        ↩️ Go Back
+    </button>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<% title='Update Concert' %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-purple-50 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Update Concert</h1>
+
+        <% if (error) { %>
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
+                <p class="font-semibold">Error(s):</p>
+                <ul>
+                    <li><%= error.message %></li>
+                </ul>
+            </div>
+        <% } %>
+
+        <% if (concert) { %>
+            <form action="/concerts/update_concert/<%= concert._id || '' %>" method="POST" class="space-y-6">
+                <div>
+                    <label for="concertName" class="block text-gray-700 font-semibold">Concert Name:</label>
+                    <input type="text" id="concertName" name="concertName" value="<%= concert.concertName || '' %>"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+  
+                <div>
+                    <label for="artist" class="block text-gray-700 font-semibold">Artist:</label>
+                    <input type="text" id="artist" name="artist" value="<%= concert.artist || '' %>"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+  
+                <div>
+                    <label for="venue" class="block text-gray-700 font-semibold">Venue:</label>
+                    <input type="text" id="venue" name="venue" value="<%= concert.venue || '' %>"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+  
+                <div>
+                    <label for="dateTime" class="block text-gray-700 font-semibold">Date and Time:</label>
+                    <input type="datetime-local" id="dateTime" name="dateTime" 
+                        value="<%= concert.dateTime ? new Date(concert.dateTime).toISOString().slice(0, 16) : '' %>"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+  
+                <div>
+                    <label for="ticketPrice" class="block text-gray-700 font-semibold">Ticket Price:</label>
+                    <input type="number" id="ticketPrice" name="ticketPrice" value="<%= concert.ticketPrice || '' %>"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+  
+                <div>
+                    <label for="availableTickets" class="block text-gray-700 font-semibold">Available Tickets:</label>
+                    <input type="number" id="availableTickets" name="availableTickets" value="<%= concert.availableTickets || '' %>"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+  
+                <div class="text-center">
+                    <button type="submit" class="w-full inline-flex items-center justify-center bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-300">
+                        Update Concert
+                    </button>
+                </div>
+            </form>
+        <% } else { %>
+            <p class="text-center text-red-600 font-semibold">Concert not found.</p>
+        <% } %>
+
+        <!-- Go Back Button -->
+        <div class="text-center mt-4">
+            <a href="/concerts/retrieve_concert" class="inline-block bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors duration-300">
+                Go Back
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

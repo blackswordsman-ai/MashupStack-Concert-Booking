@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-purple-100 to-purple-300 min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="bg-purple-700 text-white w-64 min-h-screen p-6 hidden md:block">
+        <h2 class="text-2xl font-bold mb-6">🎵 Concert Hub</h2>
+
+        <!-- Sidebar Navigation -->
+        <nav class="space-y-4">
+            <a href="/all_concerts" class="block bg-purple-600 px-4 py-2 rounded-md hover:bg-purple-800 transition">🎟️ Book a Concert</a>
+            <a href="/view-bookings/view_my_bookings" class="block bg-purple-600 px-4 py-2 rounded-md hover:bg-purple-800 transition">📑 View My Bookings</a>
+            <a href="/logout" class="block bg-red-600 px-4 py-2 rounded-md hover:bg-red-700 transition">🚪 Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+        <h1 class="text-3xl font-bold text-purple-700 mb-6 text-center">📑 My Bookings</h1>
+
+        <% if (bookings.length === 0) { %>
+            <p class="text-center text-gray-600">You haven't booked any concerts yet.</p>
+        <% } else { %>
+            <ul class="space-y-4">
+                <% bookings.forEach(booking => { %>
+                    <li class="p-4 bg-purple-50 rounded-lg shadow-md">
+                        <h2 class="text-xl font-bold text-purple-800"><%= booking.concert.title %></h2>
+                        <p class="text-gray-700">🎤 Artist: <%= booking.concert.artist %></p>
+                        <p class="text-gray-700">📅 Date: <%= new Date(booking.concert.date).toDateString() %></p>
+                        <p class="text-gray-700">📍 Venue: <%= booking.concert.venue %></p>
+                        <p class="text-gray-700">🎟️ Tickets: <%= booking.tickets %></p>
+                        <p class="text-gray-700">💲 Total Price: $<%= booking.totalPrice %></p>
+
+                        <!-- Cancel Booking Button -->
+                        <form action="/cancel-booking/<%= booking._id %>" method="POST" class="mt-4">
+                            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-700 transition">
+                                ❌ Cancel Booking
+                            </button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </div>
+
+</body>
+</html>

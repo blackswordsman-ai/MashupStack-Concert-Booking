@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Booking Confirmation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen flex justify-center items-center py-12">
+
+    <div class="bg-white p-6 rounded-lg shadow-xl max-w-lg w-full">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Cancel Booking</h1>
+
+        <div class="mb-4">
+            <p class="font-semibold text-gray-700">Concert: <%= booking.concertId.concertName %></p>
+            <p class="text-gray-600">Artist: <%= booking.concertId.artist %></p>
+            <p class="text-gray-600">Venue: <%= booking.concertId.venue %></p>
+            <p class="text-gray-600">Date: <%= new Date(booking.concertId.dateTime).toLocaleString() %></p>
+            <p class="text-gray-600">Tickets: <%= booking.numberOfTickets %></p>
+            <p class="text-gray-600">Total: $<%= booking.totalAmount %></p>
+        </div>
+
+        <form action="/cancel/<%= booking._id %>" method="POST">
+            <h2>Are you sure you want to cancel this booking?</h2>
+            <p>Concert: <%= booking.concertId.concertName %></p>
+            <p>Artist: <%= booking.concertId.artist %></p>
+            <p>Venue: <%= booking.concertId.venue %></p>
+            <p>Date: <%= booking.concertId.dateTime %></p>
+            
+            <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+            <a href="/view-bookings" class="btn btn-secondary">Back</a>
+        </form>
+        
+    </div>
+
+</body>
+</html>

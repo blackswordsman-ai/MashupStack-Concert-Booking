@@ -1,0 +1,72 @@
+<% title='Create Concert' %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Create Concert</h1>
+
+        <% if (error) { %>
+            <div class="bg-red-100 border border-red-500 text-red-700 p-4 mb-6 rounded-lg">
+                <p class="font-semibold">Error(s):</p>
+                <ul>
+                    <% Object.values(error).forEach(err => { %>
+                        <li><%= err.message %></li>
+                    <% }); %>
+                </ul>
+            </div>
+        <% } %>
+
+        <form action="/concerts/create_concert" method="post" class="space-y-4">
+            <div>
+                <label for="concertName" class="block text-gray-700 font-semibold">Concert Name:</label>
+                <input type="text" id="concertName" name="concertName" required placeholder="Enter concert name" class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label for="artist" class="block text-gray-700 font-semibold">Artist:</label>
+                <input type="text" id="artist" name="artist" required placeholder="Enter artist name" class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label for="venue" class="block text-gray-700 font-semibold">Venue:</label>
+                <input type="text" id="venue" name="venue" required placeholder="Enter venue" class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label for="dateTime" class="block text-gray-700 font-semibold">Date and Time:</label>
+                <input type="datetime-local" id="dateTime" name="dateTime" required class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label for="ticketPrice" class="block text-gray-700 font-semibold">Ticket Price ($):</label>
+                <input type="number" id="ticketPrice" name="ticketPrice" step="0.01" required placeholder="Enter ticket price" class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label for="availableTickets" class="block text-gray-700 font-semibold">Available Tickets:</label>
+                <input type="number" id="availableTickets" name="availableTickets" required placeholder="Enter available tickets" class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div class="text-center mt-6">
+                <button type="submit" class="w-full md:w-auto inline-flex items-center justify-center bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-300">
+                    Create Concert
+                </button>
+            </div>
+            <div class="text-center mt-4">
+                <button onclick="window.location.href='/concerts/retrieve_concert'" class="w-full md:w-auto inline-flex items-center justify-center bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors duration-300">
+                    Go Back to Concerts
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
